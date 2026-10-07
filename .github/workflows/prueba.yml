@@ -17,5 +17,7 @@ jobs:
             echo "Error: Los token no coinciden."
             exit 1
           fi
+        shell: bash
+
 
           
