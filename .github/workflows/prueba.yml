@@ -1,0 +1,21 @@
+name: Test self-hosted
+
+on: [push]
+jobs:
+  test:
+    runs-on: self-hosted
+    env:
+      SECRET_DEV: ${{ secrets.DEV_TOKEN }}
+    steps:
+      - name: Comparar DEV_TOKEN con LOCAL_DEV_TOKEN
+        run: |
+          echo "Comparando el secret de GitHub con la variable local."
+          if [ "$SECRET_DEV" == "$LOCAL_DEV_TOKEN" ]; then
+            echo "Los token coinciden."
+            exit 0
+          else
+            echo "Error: Los token no coinciden."
+            exit 1
+          fi
+
+          
