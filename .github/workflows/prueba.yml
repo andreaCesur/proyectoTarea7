@@ -10,7 +10,7 @@ jobs:
       - name: Comparar DEV_TOKEN con LOCAL_DEV_TOKEN
         run: |
           echo "Comparando el secret de GitHub con la variable local."
-          if ("$SECRET_DEV" == "$LOCAL_DEV_TOKEN"){
+          if (($env:SECRET_DEV -eq $env:LOCAL_DEV_TOKEN)){
             echo "Los token coinciden."
             exit 0
           } else {
