@@ -38,7 +38,7 @@ jobs:
       - name: Validar entorno de desarrollo
         env:
           TOKEN: ${{ secrets.DEV_TOKEN }}
-        shell: pwsh
+        shell: powershell
         run: |
           if ($env:TOKEN -eq $env:LOCAL_DEV_TOKEN) {
             Write-Host "CI: validación de desarrollo correcta ✅"
