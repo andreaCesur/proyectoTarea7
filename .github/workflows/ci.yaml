@@ -29,7 +29,6 @@ jobs:
           git commit -m "docs: registrar rama" || echo "Sin cambios que commitear"
           git push || echo "Nada que subir"
 
-
   validate-dev:
     needs: update-readme
     runs-on: self-hosted
