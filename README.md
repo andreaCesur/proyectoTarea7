@@ -1,2 +1,3 @@
 - Añadida feature: develop
 - AppVersion-1 - 08/10/2026 21:45- Añadida feature: develop
+- AppVersion-2 - 08/10/2026 22:47
