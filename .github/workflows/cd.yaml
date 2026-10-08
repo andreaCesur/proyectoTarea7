@@ -44,13 +44,13 @@ jobs:
     
       - uses: actions/checkout@v4
       - name: Comprobar variable local
-        shell: pwsh
+        shell: powershell
         run: |
           Write-Host "LOCAL_DEV_TOKEN: $env:LOCAL_DEV_TOKEN"
       - name: Validar entorno de desarrollo
         env:
           TOKEN: ${{ secrets.DEV_TOKEN }}
-        shell: pwsh
+        shell: powershell
         run: |
           if ($env:TOKEN -eq $env:LOCAL_DEV_TOKEN) {
             Write-Host "CI: validación de desarrollo correcta ✅"
@@ -62,7 +62,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.PROD_TOKEN }}
           LOCAL_DEV_TOKEN: ${{ secrets.DEV_TOKEN }}
-        shell: pwsh
+        shell: powershell
         run: |
           if ($env:TOKEN -eq $env:LOCAL_PROD_TOKEN) {
             Write-Host "CD: validación de producción correcta ✅ — listo para desplegar"
