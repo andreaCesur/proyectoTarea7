@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Comparar DEV_TOKEN y LOCAL_DEV_TOKEN
-        shell: pwsh
+        shell: powershell
         run: |
           Write-Host "Comprobando el secret de GitHub con la variable local."
           if ($env:TOKEN -eq $env:LOCAL_DEV_TOKEN) {
