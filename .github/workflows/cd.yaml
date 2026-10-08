@@ -36,8 +36,8 @@ jobs:
     needs: bump-version
     runs-on: self-hosted
 
-    steps:
-      #- uses: actions/checkout@v4
+    steps:  
+      - uses: actions/checkout@v4
       - name: Validar entorno de producción
         shell: powershell
         env:
