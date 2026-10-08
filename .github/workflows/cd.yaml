@@ -45,7 +45,7 @@ jobs:
       - name: Validar entorno de producción
         env:
           TOKEN: ${{ secrets.PROD_TOKEN }}
-        shell: bash
+        shell: pwsh
         run: |
           if ($env:TOKEN -eq $env:LOCAL_PROD_TOKEN) {
             Write-Host "CD: validación de producción correcta ✅ — listo para desplegar"
