@@ -12,7 +12,6 @@ jobs:
           echo "Comparando el secret de GitHub con la variable local."
           if (($env:SECRET_DEV -eq $env:LOCAL_DEV_TOKEN)){
             echo "Los token coinciden."
-            exit 0
           } else {
             echo "Error: Los token no coinciden."
             exit 1
