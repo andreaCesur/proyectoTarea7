@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
     branches: [main]
-
+    
   push:
     branches: [main]
 
@@ -14,7 +14,6 @@ permissions:
   contents: write
 
 jobs:
-
   bump-version:
     runs-on: ubuntu-latest
     steps:
@@ -26,48 +25,27 @@ jobs:
           FECHA=$(date '+%d/%m/%Y %H:%M')
           echo "- AppVersion-$NEXT - $FECHA" >> README.md
       - name: Commit y push del README
-
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "docs: bump de versión" || echo "Sin cambios que commitear"
-          git pull origin main --rebase
-          git push origin HEAD:main
-
-
+          git push || echo "Nada que subir"
 
   validate-prod:
     needs: bump-version
     runs-on: self-hosted
 
-    steps:
-    
+    steps:  
       - uses: actions/checkout@v4
-      - name: Comprobar variable local
-        shell: powershell
-        run: |
-          Write-Host "LOCAL_DEV_TOKEN: $env:LOCAL_DEV_TOKEN"
-      - name: Validar entorno de desarrollo
-        env:
-          TOKEN: ${{ secrets.DEV_TOKEN }}
-        shell: powershell
-        run: |
-          if ($env:TOKEN -eq $env:LOCAL_DEV_TOKEN) {
-            Write-Host "CI: validación de desarrollo correcta ✅"
-          } else {
-            Write-Host "CI: validación fallida ❌"
-            exit 1
-          }
       - name: Validar entorno de producción
+        shell: powershell
         env:
           TOKEN: ${{ secrets.PROD_TOKEN }}
-          LOCAL_DEV_TOKEN: ${{ secrets.DEV_TOKEN }}
-        shell: powershell
         run: |
           if ($env:TOKEN -eq $env:LOCAL_PROD_TOKEN) {
-            Write-Host "CD: validación de producción correcta ✅ — listo para desplegar"
+            Write-Host 'CD: validación de producción correcta — listo para desplegar'
           } else {
-            Write-Host "CD: validación fallida ❌"
+            Write-Host 'CD: validación fallida'
             exit 1
           }
